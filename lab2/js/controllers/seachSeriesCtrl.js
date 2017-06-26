@@ -11,8 +11,8 @@ app.controller("seachSeriesCtrl", function ($scope, $http, $localStorage) {
     $scope.info =[];
 
 
-    $scope.queroAssistir2 = $localStorage.queroAssistir;
-    $scope.minhaLista2 = $localStorage.minhaLista;
+    $scope.queroAssistirPersitente = $localStorage.queroAssistir;
+    $scope.minhaListaPersistente = $localStorage.minhaLista;
 
 
 
@@ -35,21 +35,24 @@ app.controller("seachSeriesCtrl", function ($scope, $http, $localStorage) {
     };
 
 
-    $scope.adicionaNoWatchlist = function(serie) {
+    $scope.addQueroAssisitir = function(serie) {
 
-        if($scope.contemSerieWatchlist(serie)) {
-            alert("A Série já existe no seu Watchlist!");
+        if($scope.contemEmDesejoAssistir(serie)) {
+            alert("A Série já existe no seu Desejo Assistir!");
+        }
+        if($scope.contemSeriePerfil(serie)) {
+            alert("A Série já existe no seu Perfil");
         }
         else {
 
             $scope.queroAssistir.push(serie);
-            $scope.queroAssistir2 = $localStorage.queroAssistir.push(serie);
+            $scope.queroAssistirPersitente = $localStorage.queroAssistir.push(serie);
 
 
         }
     };
 
-    $scope.contemSerieWatchlist = function(serie) {
+    $scope.contemEmDesejoAssistir = function(serie) {
         for (var i = 0; i < $localStorage.queroAssistir.length; i++) {
             if($localStorage.queroAssistir[i].Title === serie.Title) {
                 return true;
@@ -59,14 +62,16 @@ app.controller("seachSeriesCtrl", function ($scope, $http, $localStorage) {
     };
 
     $scope.removeSerieDaMinhaLista = function(serie) {
-        $scope.remove($scope.minhaLista, serie);
-        $scope.remove($scope.minhaLista2, serie);
-
+        var resposta = confirm("Deseja realmente remover a série " +serie.Title+ "?");
+        if (resposta==true) {
+            $scope.remove($scope.minhaLista, serie);
+            $scope.remove($scope.minhaListaPersistente, serie);
+        }
     };
 
-    $scope.removeDaWatchlist = function(serie) {
+    $scope.removeDesejoAssistir = function(serie) {
         $scope.remove($scope.queroAssistir, serie);
-        $scope.remove($scope.queroAssistir2, serie);
+        $scope.remove($scope.queroAssistirPersitente, serie);
     };
 
     $scope.adicionaNoPerfil = function(serie) {
@@ -80,7 +85,7 @@ app.controller("seachSeriesCtrl", function ($scope, $http, $localStorage) {
             function successCallback(response) {
 
                 $scope.minhaLista.push(response.data);
-                $scope.minhaLista2.push(response.data);
+                $scope.minhaListaPersistente.push(response.data);
 
 
             }function errorCallback(error) {
@@ -100,7 +105,7 @@ app.controller("seachSeriesCtrl", function ($scope, $http, $localStorage) {
         }
         else {
             $scope.adicionaNoPerfil(serie);
-            $scope.removeDaWatchlist(serie);
+            $scope.removeDesejoAssistir(serie);
         }
     };
 

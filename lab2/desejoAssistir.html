@@ -48,13 +48,13 @@
     <h2>Series que desejo assistir</h2>
 
 
-    <div ng-repeat="serie in queroAssistir2" class="col-sm-4">
+    <div ng-repeat="serie in queroAssistirPersitente" class="col-sm-4">
         <br/>
 
         <h4>{{serie.Title}}</h4>
         <img ng-src="{{serie.Poster !== 'N/A' ? serie.Poster: 'img/filme.png'}}" class="col-sm-4" >
 
-        <button class="btn btn-warning" ng-click="removeDaWatchlist(serie)">
+        <button class="btn btn-warning" ng-click="removeDesejoAssistir(serie)">
             - Remover da Watchlist
         </button>
 

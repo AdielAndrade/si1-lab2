@@ -64,7 +64,7 @@
             <img ng-src="{{serie.Poster !== 'N/A' ? serie.Poster: 'img/filme.png'}}" class="col-sm-4" >
 
 
-            <button class="btn btn-primary" ng-click="adicionaNoWatchlist(serie)">
+            <button class="btn btn-primary" ng-click="addQueroAssisitir(serie)" >
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Desejo assistir
 
             </button>
@@ -89,7 +89,7 @@
     <h2>Meu perfil</h2>
 
 
-    <div ng-repeat="serie in minhaLista2" class="col-sm-4">
+    <div ng-repeat="serie in minhaListaPersistente" class="col-sm-4">
         <br/>
 
         <br/>
