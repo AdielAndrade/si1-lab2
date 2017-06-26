@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="pesquisa" >
+<head>
+
+    <meta charset="UTF-8">
+    <title>Lab 02 Adiel</title>
+
+
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
+
+    <link rel="stylesheet" type="text/css" href="CSS/app.css">
+
+    <script src="lib/angular/angular.min.js"></script>
+
+    <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+    <script src="js/app.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
+
+
+    <script src="js/controllers/seachSeriesCtrl.js"></script>
+
+</head>
+
+<body ng-controller="seachSeriesCtrl">
+
+
+<div class="jumbotron">
+
+
+
+    <div class="col-sm-6">
+        <h1>{{app}}</h1>
+        <input  type="text" ng-model="nome" placeholder="Nome da série">
+        <button class="btn btn-danger btn-lg" ng-click="encontraSerie(nome)"  ng-disabled="!nome">Pesquisar</button>
+    </div>
+
+    <div >
+        <ul class="list-unstyled">
+            <li class="active"><a  href="index.html">Inicio</a></li>
+            <li><a  href="perfil.html">Meu Perfil</a></li>
+            <li><a href="desejoAssistir.html">Desejo assistir</a></li>
+
+
+
+        </ul>
+    </div>
+
+
+</div>
+
+
+<div class="row">
+
+
+        <h2>{{resultado}}</h2>
+        <div ng-repeat="serie in seriesEncontradas" class="col-sm-4">
+            <br/>
+
+
+            <li class="list-unstyled">
+                <h3>{{serie.Title}}</h3>
+            </li>
+            <img ng-src="{{serie.Poster !== 'N/A' ? serie.Poster: 'img/filme.png'}}" class="col-sm-4" >
+
+
+            <button class="btn btn-primary" ng-click="adicionaNoWatchlist(serie)">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Desejo assistir
+
+            </button>
+
+            <br/>
+            <br/>
+
+            <button class="btn btn-primary" ng-click="adicionaNoPerfil(serie)">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar ao Perfil
+            </button>
+
+
+
+        </div>
+</div>
+
+
+
+
+<div class="row">
+
+    <h2>Meu perfil</h2>
+
+
+    <div ng-repeat="serie in minhaLista2" class="col-sm-4">
+        <br/>
+
+        <br/>
+
+        <h4>{{serie.Title}}</h4>
+
+        <a href="#myModal{{$index}}" data-toggle="modal"><img src="{{serie.Poster !== 'N/A' ? serie.Poster: 'img/filme.png'}}" title="Informações"/></a>
+        <button class="btn btn-warning" ng-click="removeSerieDaMinhaLista(serie)">
+            - Retirar da minha lista
+        </button>
+
+        <div id="myModal{{$index}}" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">{{serie.Title}}</h4>
+                    </div>
+
+                    <div class="modal-body container" >
+                        <img src="{{serie.Poster !== 'N/A' ? serie.Poster: 'img/filme.png'}}"  class="col-xs-4"/>
+                        <div class="container-fluid" style="width: 50%">
+
+                            <h6><b>Sinopse:</b> {{serie.Plot}}</h6>
+                            <h6> <b>Nota: </b>{{serie.imdbRating}}</h6>
+                            <h6><b>Classificação Etária: </b> {{serie.Rated}}</h6>
+                            <input  type="text" ng-model="nota" placeholder="Nota">
+                            <input  type="text" ng-model="episodio" placeholder="Ultimo episodio">
+                            <button class="btn btn-danger btn-lg"  ng-disabled="!nome">Salvar</button>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+</body>
+</html>

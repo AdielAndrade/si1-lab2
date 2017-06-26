@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="pesquisa" >
+<head>
+
+    <meta charset="UTF-8">
+    <title>Lab 02 Adiel</title>
+
+
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
+
+    <link rel="stylesheet" type="text/css" href="CSS/app.css">
+
+    <script src="lib/angular/angular.min.js"></script>
+
+    <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+    <script src="js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
+
+
+    <script src="js/controllers/seachSeriesCtrl.js"></script>
+
+</head>
+
+<body ng-controller="seachSeriesCtrl">
+
+
+<div class="jumbotron">
+
+
+
+    <div class="col-sm-6">
+        <h1 style="font-size: 95px">{{app}}</h1>
+    </div>
+
+    <div >
+        <ul class="list-unstyled">
+            <li class="active"><a href="index.html">Inicio</a></li>
+            <li><a  href="perfil.html">Meu Perfil</a></li>
+            <li><a href="desejoAssistir.html">Desejo assistir</a></li>
+
+
+        </ul>
+    </div>
+</div>
+
+<div class="row">
+
+    <h2>Series que desejo assistir</h2>
+
+
+    <div ng-repeat="serie in queroAssistir2" class="col-sm-4">
+        <br/>
+
+        <h4>{{serie.Title}}</h4>
+        <img ng-src="{{serie.Poster !== 'N/A' ? serie.Poster: 'img/filme.png'}}" class="col-sm-4" >
+
+        <button class="btn btn-warning" ng-click="removeDaWatchlist(serie)">
+            - Remover da Watchlist
+        </button>
+
+        <br/>
+        <br/>
+
+        <button class="btn btn-primary"  ng-click="moveParaPerfil(serie)" >
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Adicionar ao Perfil
+        </button>
+
+    </div>
+</div>
+
+
+
+
+</body>
+</html>
